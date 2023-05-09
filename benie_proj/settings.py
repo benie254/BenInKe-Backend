@@ -34,7 +34,7 @@ if os.getenv('MODE')=="dev":
             'USER': os.getenv('DB_USER'),
             'PASSWORD': os.getenv('DB_PASSWORD'),
             'HOST': os.getenv('DB_HOST'),
-            'PORT': '',
+            'PORT': '5432',
         }
     }
 # production
@@ -100,7 +100,7 @@ REGISTRATION_AUTO_LOGIN = True
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
-# AUTH_USER_MODEL = 'benie_app.MyUser'
+AUTH_USER_MODEL = 'benie_app.MyUser'
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
