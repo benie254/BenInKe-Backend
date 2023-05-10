@@ -142,7 +142,7 @@ class Logout(APIView):
         }
         return response 
     
-class ChangePasswordView(UpdateAPIView):
+class ChangePassword(UpdateAPIView):
 
     queryset = User.objects.all()
     permission_classes = (IsAuthenticated,IsAdminUser,)
