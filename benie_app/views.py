@@ -1,18 +1,15 @@
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.db.models import Sum 
-from django.http import Http404
-import datetime as dt 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status 
 from rest_framework.decorators import permission_classes 
 from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
-from rest_framework.exceptions import ValidationError
 import sendgrid 
 from sendgrid.helpers.mail import *
 from decouple import config 
-from benie_app.serializers import StorySerializer, TagSerializer, ReactionSerializer, FeedbackSerializer, DeleteSubSerializer, ReplySerializer, ChapterSerializer, PageSerializer, SubscriberSerializer, NotificationSerializer, ContactSerializer, PoemSerializer
+from benie_app.serializers import StorySerializer, TagSerializer, ReactionSerializer, FeedbackSerializer, ReplySerializer, ChapterSerializer, PageSerializer, SubscriberSerializer, NotificationSerializer, ContactSerializer, PoemSerializer
 from benie_app.models import Story, Tag, Reaction, Feedback, Chapter, Page, Subscriber, Notification, Contact, Poem, Reply
 
 # Create your views here.
