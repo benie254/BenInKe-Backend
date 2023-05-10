@@ -18,7 +18,8 @@ from benie_app.models import Story, Tag, Reaction, Feedback, Chapter, Page, Subs
 # Create your views here.
 @permission_classes([IsAuthenticatedOrReadOnly,])
 def landing(request):
-    return render(request,'landing.html',{})
+    title = 'BenInKe'
+    return render(request,'landing.html',{"title":title})
 
 @permission_classes([IsAuthenticatedOrReadOnly,])
 def home(request):
@@ -29,7 +30,7 @@ def home(request):
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class AllStories(APIView):
     def get(self,request):
-        stories = Story.objects.all().order_by('-first_published')
+        stories = Story.objects.all().order_by('-uploaded')
         serializers = StorySerializer(stories,many=True)
         story = Story.objects.filter(pin='pinned').last()
         if story:
@@ -57,7 +58,7 @@ class AllStories(APIView):
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class OngoingStories(APIView):
     def get(self,request):
-        stories = Story.objects.all().filter(status='ongoing').order_by('-first_published')
+        stories = Story.objects.all().filter(status='ongoing').order_by('-uploaded')
         if stories:
             serializers = StorySerializer(stories,many=True)
             return Response(serializers.data)
@@ -66,7 +67,7 @@ class OngoingStories(APIView):
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class CompletedStories(APIView):
     def get(self,request):
-        stories = Story.objects.all().filter(status='completed').order_by('-first_published')
+        stories = Story.objects.all().filter(status='completed').order_by('-uploaded')
         if stories:
             serializers = StorySerializer(stories,many=True)
             return Response(serializers.data)
@@ -438,8 +439,6 @@ class AddTag(APIView):
             return Response(serializers.data,status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST) 
 
-
-
 @permission_classes([IsAdminUser,])
 class TagDetails(APIView):
     def get(self,request, id):
@@ -596,13 +595,11 @@ class ChapterPages(APIView):
 
 @permission_classes([AllowAny,])
 class AllSubscribers(APIView):
-    # permission_classes = (IsAdminUser,IsAuthenticated)
     def get(self,request,format=None):
         subscribers = Subscriber.objects.all().order_by('date_subscribed')
         serializers = SubscriberSerializer(subscribers,many=True)
         return Response(serializers.data)
     
-    # permission_classes = (AllowAny)
     def post(self,request,format=None):
         serializers = SubscriberSerializer(data=request.data)
         if serializers.is_valid():
