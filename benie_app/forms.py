@@ -1,7 +1,4 @@
 from django import forms 
-from django.contrib import admin 
-from django.contrib.auth.admin import UserAdmin
-from django.core.exceptions import ValidationError
 from django_registration.forms import RegistrationForm
 from django.contrib.auth.forms import AuthenticationForm
 from benie_app.models import MyUser
