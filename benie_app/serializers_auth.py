@@ -44,7 +44,7 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
         instance.save()
         return instance 
     
-class PasswordResetRequestSerialize(serializers.ModelSerializer):
+class PasswordResetRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Password 
         fields = ('username','email')
