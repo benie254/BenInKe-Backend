@@ -203,7 +203,7 @@ class UserAdmin(admin.ModelAdmin):
         return super().response_add(request, obj, post_url_continue)
     
 
-class StoryAdmin(admin.ModelAdmiin):
+class StoryAdmin(admin.ModelAdmin):
     filter_horizontal = ('tagged',)
     model = Story
     fields = ['cover','description','title','category','tagged']
