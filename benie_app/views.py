@@ -325,7 +325,7 @@ class ChapterReactions(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST) 
     
 @permission_classes([IsAuthenticatedOrReadOnly,])
-class Feedbacks(APIView):
+class StoryFeedbacks(APIView):
     def get(self, request, id):
         comments = Feedback.objects.all().filter(chapter=id)
         serializers = FeedbackSerializer(comments,many=True)
