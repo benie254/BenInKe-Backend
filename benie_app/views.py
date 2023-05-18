@@ -740,7 +740,9 @@ class Contacts(APIView):
         contacts = Contact.objects.all().order_by('-date')
         serializers = ContactSerializer(contacts,many=True)
         return Response(serializers.data)
-    
+
+@permission_classes([AllowAny,])
+class AddContact(APIView):
     def post(self, request, format=None):
         serializers = ContactSerializer(data=request.data)
         if serializers.is_valid():

@@ -33,4 +33,5 @@ urlpatterns = [
     url(r'^notifications/all$',views.Notifications.as_view(),name='notifications'),
     url(r'^newsletter/subscribers$',views.AllSubscribers.as_view(),name='newsletter-subscribers'),
     path('newsletter/unsubscribe/<str:user_email>',views.Unsubscribe.as_view(),name='unsubscribe'),
+    url(r'^contacts/add$',views.AddContact.as_view(),name='contacts'),
 ]
