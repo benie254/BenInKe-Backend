@@ -104,7 +104,7 @@ class AllFeedbacks(APIView):
                 pmp = 'Not a poem'
             serializers.save()
             sg = sendgrid.SendGridAPIClient(api_key=config('SENDGRID_API_KEY'))
-            msg = render_to_string('email/new-comment.html', {
+            msg = render_to_string('email/comment-new.html', {
                 'story':story,
                 'stp': stp,
                 'poem': poem,
@@ -165,7 +165,7 @@ class AllReplies(APIView):
                 pmp = 'Not a poem'
             serializers.save()
             sg = sendgrid.SendGridAPIClient(api_key=config('SENDGRID_API_KEY'))
-            msg = render_to_string('email/new-reply.html', {
+            msg = render_to_string('email/comment-reply-new.html', {
                 'replied_by':replied_by,
                 'content': content,
                 'reply': reply,
@@ -604,7 +604,7 @@ class AllSubscribers(APIView):
             email = serializers.validated_data['email']
             serializers.save()
             sg = sendgrid.SendGridAPIClient(api_key=config('SENDGRID_API_KEY'))
-            msg = render_to_string('email/new-subscriber.html', {
+            msg = render_to_string('email/subscriber-new.html', {
                 'name': name,
                 'email': email,
             })
@@ -622,7 +622,7 @@ class AllSubscribers(APIView):
                 print(response.headers)
             except Exception as e:
                 print(e)
-            msg2 = render_to_string('email/welcome-subscriber.html', {
+            msg2 = render_to_string('email/subscriber-welcome.html', {
                 'name': name,
                 'email': email,
             })
@@ -659,7 +659,7 @@ class Unsubscribe(APIView):
         subscriber = Subscriber.objects.all().filter(email=user_email).last()
         if subscriber:
             sg = sendgrid.SendGridAPIClient(api_key=config('SENDGRID_API_KEY'))
-            msg = render_to_string('email/unsubscribed.html', {
+            msg = render_to_string('email/subscriber-unsubscribed.html', {
                     'email': user_email,
             })
             message = Mail(
@@ -676,7 +676,7 @@ class Unsubscribe(APIView):
                 print(response.headers)
             except Exception as e:
                 print(e)
-            msg2 = render_to_string('email/goodbye-subscriber.html', {
+            msg2 = render_to_string('email/subscriber-goodbye.html', {
                     'email': user_email,
                 })
             message2 = Mail(
@@ -751,7 +751,7 @@ class AddContact(APIView):
             message = serializers.validated_data['message']
             serializers.save()
             sg = sendgrid.SendGridAPIClient(api_key=config('SENDGRID_API_KEY'))
-            msg = render_to_string('email/new-contact.html', {
+            msg = render_to_string('email/contact-new.html', {
                 'name': name,
                 'email': email,
                 "message": message,
@@ -771,7 +771,7 @@ class AddContact(APIView):
             except Exception as e:
                 print(e)
 
-            msg2 = render_to_string('email/message-delivered.html', {
+            msg2 = render_to_string('email/contact-msg-delivered.html', {
                 'name': name,
             })
             message2 = Mail(
