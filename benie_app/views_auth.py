@@ -162,7 +162,7 @@ class PasswordResetRequest(APIView):
             serializer.save()
             user_id = user.id
             current_site = get_current_site(request)
-            myHtml = render_to_string('reset-pass.html', {
+            myHtml = render_to_string('pass-reset-request.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user_id)),
