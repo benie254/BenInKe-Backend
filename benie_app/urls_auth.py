@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^password/reset/request$',views_auth.PasswordResetRequest.as_view(),name='reset-password-request'),
     path('password/reset/confirmed/<int:pk>',views_auth.ResetPassword.as_view(),name='reset-password-confirmed'),
     path('password/reset/complete/<slug:uidb64>/<slug:token>',views_auth.activate,name='reset-password-complete'),
-    url(r'^auth/$',include('knox.urls')),
+    url(r'^auth/',include('knox.urls')),
     url(r'^auth/register$',views_auth.Register.as_view(),name='register'),
     url(r'^auth/login$',views_auth.Login.as_view(),name='login'),
     url(r'^auth/logout$',views_auth.Logout.as_view(),name='logout'),

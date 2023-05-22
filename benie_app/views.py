@@ -9,6 +9,9 @@ from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated, I
 import sendgrid 
 from sendgrid.helpers.mail import *
 from decouple import config 
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+import os
 from benie_app.serializers import StorySerializer, TagSerializer, ReactionSerializer, FeedbackSerializer, ReplySerializer, ChapterSerializer, PageSerializer, SubscriberSerializer, NotificationSerializer, ContactSerializer, PoemSerializer
 from benie_app.models import Story, Tag, Reaction, Feedback, Chapter, Page, Subscriber, Notification, Contact, Poem, Reply
 
@@ -770,6 +773,8 @@ class AddContact(APIView):
                 print(response.headers)
             except Exception as e:
                 print(e)
+                print("okay")
+            
 
             msg2 = render_to_string('email/contact-msg-delivered.html', {
                 'name': name,
