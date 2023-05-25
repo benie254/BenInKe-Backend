@@ -19,6 +19,5 @@ urlpatterns = [
     url(r'^poems/add$',views.AddPoem.as_view(),name='add-poem'),
     url(r'^poem/update/(\d+)$',views.UpdatePoem.as_view(),name='update-poem'),
     url(r'^notification/details/(\d+)$',views.NotificationDetails.as_view(),name='notification-details'),
-    url(r'^feedback/details/(\d+)$',views.FeedbackDetails.as_view(),name='feedback-details'),
     url(r'^reaction/details/(\d+)$',views.ReactionDetails.as_view(),name='reaction-details'),
 ]

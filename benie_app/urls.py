@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^replies/all$',views.AllReplies.as_view(),name='all-replies'),
     url(r'^reactions/all$',views.AllRecations.as_view(),name='all-reactions'),
     url(r'^feedbacks/all$',views.AllFeedbacks.as_view(),name='all-feedbacks'),
+    url(r'^feedback/details/(\d+)$',views.FeedbackDetails.as_view(),name='feedback-details'),
     url(r'^feedback/replies/(\d+)$',views.FeedbackReplies.as_view(),name='poem-feedback-replies'),
     url(r'^feedback/likes/(\d+)$',views.FeedbackLikes.as_view(),name='poem-feedback-likes'),
     url(r'^notifications/all$',views.Notifications.as_view(),name='notifications'),

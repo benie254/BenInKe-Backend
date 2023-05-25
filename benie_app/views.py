@@ -471,7 +471,7 @@ class ReactionDetails(APIView):
         reaction.delete()
         return Response(status=status.HTTP_200_OK) 
     
-@permission_classes([IsAdminUser,])
+@permission_classes([AllowAny,])
 class FeedbackDetails(APIView):
     def get(self,request, id):
         comment = Feedback.objects.all().filter(pk=id).last()
