@@ -217,7 +217,7 @@ def activate(request, uidb64, token):
                 'success':successMsg,
             }
             # return response 
-            return redirect('http://localhost:4200/auth/confirmed/password/reset' + uid)
+            return redirect('http://benie.web.app/auth/confirmed/password/reset' + uid)
         else:
             Http404
             print("failure")

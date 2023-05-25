@@ -107,6 +107,7 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:4200',
     'http://127.0.0.1:8000',
     'https://beninke.web.app',
+    'https://benie.web.app'
 )
 
 MIDDLEWARE = [
