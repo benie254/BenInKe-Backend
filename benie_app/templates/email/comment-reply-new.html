@@ -1,42 +1,30 @@
-
-<div>
-    <h3><i class="fa-solid fa-book-open-reader"></i> Benie Writes</h3>
-    <h1>Hello, Benie.</h1>
-    <p>You have a new contact on Benie Writes. Check out their message on the admin ASAP.</p>
-    <br>
-    <small>
-        Cheers!
-        <br>
-        The Dev Team,
-        <br>
-        Benie Writes.
-    </small>
-</div>
-
 <div class="container" style="padding:2.5%;">
-    <a href="https://benie.web.app/">
-        <h1 style="text-align:center;">
-            <img src="https://res.cloudinary.com/benie/image/upload/v1673225347/Screenshot_from_2023-01-09_03-48-56_z2mvlz.png" height="50" alt="">
-        </h1>
-    </a>
-    <div style="padding:1.5%;">
-        <h1>Hello Benie,</h1>
-        <p>You have a new reply to a comment on Benie Writes. Here are the details:</p>
-        <ul>
-            {{stp}} | {{pmp}}
-            <a href="https://benie.web.app/stories/{{story.category}}/{{story.title}}/preview/{{story.id}}"><li>{{story.title}}</li></a>
-            <a href="https://benie.web.app/poems/{{poem.category}}/{{poem.title}}/read/{{poem.id}}"><li>{{poem.title}}</li></a>
-            <h3 style="color:orange">Reply</h3>
-            <p>{{reply}}</p>
-            <small style="color: blueviolet">replying to:
+    <div class="container" style="background-color:rgb(51, 50, 50);">
+        <a href="https://benie.web.app/">
+            <h1 style="text-align:center;">
+                <img src="https://res.cloudinary.com/benie/image/upload/v1673225347/Screenshot_from_2023-01-09_03-48-56_z2mvlz.png" height="50" alt="">
+            </h1>
+        </a>
+        <div style="padding:1.5%;">
+            <h1>Hello Benie,</h1>
+            <p>You have a new reply to a comment on Benie Writes. Here are the details:</p>
+            <ul>
+                {{stp}} | {{pmp}}
+                <a href="https://benie.web.app/stories/{{story.category}}/{{story.title}}/preview/{{story.id}}"><li>{{story.title}}</li></a>
+                <a href="https://benie.web.app/poems/{{poem.category}}/{{poem.title}}/read/{{poem.id}}"><li>{{poem.title}}</li></a>
+                <h3 style="color:orange">Reply</h3>
+                <p>{{reply}}</p>
+                <small style="color: blueviolet">replying to:
+                <br>
+            {{comment.comment}} 
             <br>
-        {{comment.comment}} 
-        <br>
-        <span style="color:orange">commented by</span> {{comment.commented_by}} on {{comment.date | date}}
-        </small>
-        </ul>
+            <span style="color:orange">commented by</span> {{comment.commented_by}} on {{comment.date | date}}
+            </small>
+            </ul>
+        </div>
     </div>
-    <div style="padding:1.5%;margin-top:1.5%;background-color:rgb(51, 50, 50);">
+    
+    <div style="padding:1.5%;margin-top:1.5%;">
         <p>
             Cheers!
             <br>
@@ -46,7 +34,7 @@
         </p>
         <br>
         <div style="text-align:center;">
-            <small>All rights reserved. Benson Langat, 2022</small>
+            <small>2023 | Benson Langat | All rights reserved</small>
         </div>
     </div>    
 </div>
