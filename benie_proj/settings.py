@@ -48,7 +48,8 @@ else:
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS'),
+# ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS'),
+ALLOWED_HOSTS = ['*']
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
@@ -156,8 +157,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
 )
 
-# WSGI_APPLICATION = 'benie_proj.wsgi.application'
-WSGI_APPLICATION = 'benie_proj.wsgi.app'
+WSGI_APPLICATION = 'benie_proj.wsgi.application'
 
 
 # Database
@@ -198,7 +198,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles_build','static')
 STATIC_URL = '/static/'
 
 # extra places for collectstatic to find static files
