@@ -62,7 +62,7 @@ class OngoingStories(APIView):
         if stories:
             serializers = StorySerializer(stories,many=True)
             return Response(serializers.data)
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class CompletedStories(APIView):
@@ -71,7 +71,7 @@ class CompletedStories(APIView):
         if stories:
             serializers = StorySerializer(stories,many=True)
             return Response(serializers.data)
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class AllTags(APIView):
@@ -264,7 +264,7 @@ class RelatedStories(APIView):
         if by_status:
             serializers = StorySerializer(by_status,many=True)
             return Response(serializers.data)
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_204_NO_CONTENT)
     
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class StoryDetails(APIView):
@@ -579,7 +579,7 @@ class FeedbackLikes(APIView):
             comment.refresh_from_db
             serializers = ReplySerializer(likes,many=True)
             return Response(serializers.data)
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_204_NO_CONTENT)
     
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class ChapterPages(APIView):
