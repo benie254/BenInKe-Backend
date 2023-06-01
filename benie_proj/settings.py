@@ -156,7 +156,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
 )
 
-WSGI_APPLICATION = 'benie_proj.wsgi.application'
+# WSGI_APPLICATION = 'benie_proj.wsgi.application'
+WSGI_APPLICATION = 'benie_proj.wsgi.app'
 
 
 # Database
