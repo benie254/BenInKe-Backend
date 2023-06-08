@@ -254,7 +254,7 @@ class Poem(models.Model):
     cover = models.URLField(max_length=5000,default='')
     cover_source = models.URLField(max_length=5000,default='',null=True,blank=True)
     excerpt = models.TextField(max_length=2000,default='') 
-    description = models.TextField(max_length=5000,default='') 
+    description = models.TextField(max_length=20000,default='') 
     uploaded = models.DateTimeField(auto_now_add=True)
     words = models.PositiveIntegerField(null=True,blank=True)
     CATEGORIES = (('Spoken-Word','Spoken-Word',),('Poetic-Chains','Poetic-Chains'),('Poetic-Notes','Poetic-Notes'),('One-Liners','One-Liners'),('Poems','Poems'))
