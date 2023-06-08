@@ -53,37 +53,38 @@ class UserProfiles(APIView):
 class Register(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        username = serializer.validated_data['username']
-        receiver = serializer.validated_data['email']
-        user = serializer.save()
-        user.refresh_from_db()
-        user.save()
-        sg = sendgrid.SendGridAPIClient(api_key=config('SENDGRID_API_KEY'))
-        msg = "Nice to have you on board LogOnGo. Let's get to work!</p> <br> <small> The welcome committee, <br> LogOnGo. <br> ©Pebo Kenya Ltd  </small>"
-        message = Mail(
-            from_email = Email("davinci.monalissa@gmail.com"),
-            to_emails = receiver,
-            subject = "You're in!",
-            html_content='<p>Hello, ' + str(username) + '! <br><br>' + msg
-        )
-        try:
-            sendgrid_client = sendgrid.SendGridAPIClient(config('SENDGRID_API_KEY'))
-            response = sendgrid_client.send(message)
-            print(response.status_code)
-            print(response.body)
-            print(response.headers)
-        except Exception as e:
-            print(e)
-        status_code = status.HTTP_201_CREATED
-        token = AuthToken.objects.create(user)
-        response = {
-            'success' : 'True',
-            'status code' : status_code,
-            'message': 'User registered  successfully',
-            "token": token[1]
-            }
-        return Response(serializer.data)
+        # serializer.is_valid(raise_exception=True)
+        if serializer.is_valid():
+            username = serializer.validated_data['username']
+            receiver = serializer.validated_data['email']
+            user = serializer.save()
+            user.refresh_from_db()
+            sg = sendgrid.SendGridAPIClient(api_key=config('SENDGRID_API_KEY'))
+            msg = "Nice to have you on board LogOnGo. Let's get to work!</p> <br> <small> The welcome committee, <br> LogOnGo. <br> ©Pebo Kenya Ltd  </small>"
+            message = Mail(
+                from_email = Email("davinci.monalissa@gmail.com"),
+                to_emails = receiver,
+                subject = "You're in!",
+                html_content='<p>Hello, ' + str(username) + '! <br><br>' + msg
+            )
+            try:
+                sendgrid_client = sendgrid.SendGridAPIClient(config('SENDGRID_API_KEY'))
+                response = sendgrid_client.send(message)
+                print(response.status_code)
+                print(response.body)
+                print(response.headers)
+            except Exception as e:
+                print(e)
+            status_code = status.HTTP_201_CREATED
+            token = AuthToken.objects.create(user)
+            response = {
+                'success' : 'True',
+                'status code' : status_code,
+                'message': 'User registered  successfully',
+                "token": token[1]
+                }
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 @permission_classes([AllowAny,])
 class Login(APIView):

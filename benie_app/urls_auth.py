@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^auth/',include('knox.urls')),
     url(r'^auth/register$',views_auth.Register.as_view(),name='register'),
     url(r'^auth/login$',views_auth.Login.as_view(),name='login'),
-    url(r'^auth/logout$',views_auth.Logout.as_view(),name='logout'),
+    url(r'^auth/logout$',knox_views.LogoutView.as_view(),name='logout'),
     url(r'^profile$',views_auth.UserView.as_view(),name='user'),
     path('update/<int:pk>',views_auth.UpdateUser.as_view(),name='update-user'),
     url(r'^profiles/all$',views_auth.UserProfiles.as_view(),name='all-users'),
