@@ -224,7 +224,7 @@ class AllChapters(APIView):
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class AllPages(APIView):
     def get(self,request):
-        pages = Page.objects.all()
+        pages = Page.objects.all().order_by('-uploaded')
         serializers = PageSerializer(pages,many=True)
         return Response(serializers.data)
 
