@@ -3,30 +3,50 @@
 {% block content %}
 <div class="container shadow">
     <br>
-    <h1>
+    <h1 class="text-center">
         Benie Writes 
         <br>
         <span>
             <h4>API Endpoints</h4>
         </span>
     </h1>
+    <h6>Below are some of the commonly used API endpoints on the app Benie Writes:</h6>
     <br>
     <ol class="bg-light w-50">
         <li><a href="{% url 'all-stories' %}">All stories</a></li>
         <span>
             <ul>
-                {% for s in stories %}<li><a href="{% url 'story-details' s.id %}">Story: <span><strong>{{s.title}}</strong></span> details</a></li>{% endfor %}
+                {% for s in stories %}
+                <li><a href="{% url 'story-details' s.id %}"><span><strong>{{s.title}}</strong></span></a></li>
+                {% endfor %}
             </ul>
         </span>
-        <li><a href="{% url 'all-chapters' %}">All chapters</a></li>
+        {% if ongoing %}
+        <li><a href="{% url 'ongoing-stories' %}">Ongoing stories</a></li>
         <span>
             <ul>
-                {% for c in chapters %}<li><a href="{% url 'chapter-details' c.id %}">Chapter: {{s.id}}. <span><strong>{{s.title}}</strong> </span> details</a></li>{% endfor %}
+            {% for on in ongoing %}
+            <li>
+                <li><a href="{% url 'story-details' on.id}"><strong>{{on.title}}</strong></a></li>
+            </li>
+            {% endfor %}
             </ul>
         </span>
-        <li><a href="{% url 'all-tags' %}">All tags</a></li>
-        <li><a href="{% url 'all-feedbacks' %}">All feedbacks</a></li>
-        <li><a href="{% url 'all-reactions' %}">All reactions</a></li>
+        {% endif %}
+        {% if completed %}
+        <li><a href="{% url 'completed-stories' %}">Completed stories</a></li>
+        <span>
+            <ul>
+            {% for comp in completed %}
+            <li>
+                <li><a href="{% url 'story-details' com.id}"><strong>{{com.title}}</strong></a></li>
+            </li>
+            {% endfor %}
+            </ul>
+        </span>
+        {% endif %}   
+        <li><a href="{% url 'all-poems' %}">All poems</a></li>     
+        <li><a href="{% url 'notifications' %}">All notifications</a></li>
     </ol>
 </div>
 {% endblock %}

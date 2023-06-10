@@ -18,14 +18,16 @@ from benie_app.models import Story, Tag, Reaction, Feedback, Chapter, Page, Subs
 # Create your views here.
 @permission_classes([IsAuthenticatedOrReadOnly,])
 def landing(request):
-    title = 'BenInKe'
+    title = 'Home'
     return render(request,'landing.html',{"title":title})
 
 @permission_classes([IsAuthenticatedOrReadOnly,])
 def home(request):
     stories = Story.objects.all()
     chapters = Chapter.objects.all()
-    return render(request,'index.html',{"stories":stories,"chapters":chapters})
+    ongoing = Story.objects.all().filter(status="ongoing")
+    completed = Story.objects.all().filter(status="completed")
+    return render(request,'index.html',{"stories":stories,"chapters":chapters,"ongoing":ongoing,"completed":completed})
 
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class AllStories(APIView):
