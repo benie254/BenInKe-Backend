@@ -1,11 +1,46 @@
 {% extends 'base.html' %} 
 
 {% block content %} 
-<div class="text-center container bg-light">
+<div class="container bg-light">
     <br><br><br>
-    <h1>Benie Writes</h1>
-    <a href="/api/">
-        <button class="btn btn-md w-50 btn-info">Go to the API</button>
-    </a>
+    <h1 class="text-center">
+        Benie Writes
+        <br>
+        <a href="/api/">
+            <button class="btn btn-md w-50 btn-info">Go to the API</button>
+        </a>
+    </h1>
+    <br>
+    <h6>Benie Writes is a blog application.</h6>
+    <div class="row">
+        <div class="col-md-6">
+            <p class="text-primary">Admin users can:</p>
+                <ul>
+                    <li>Create an account.</li>
+                    <li>Add, edit, or delete stories.</li>
+                    <li>Add,edit, or delete poems.</li>
+                    <li>Add, edit, or delete comments.</li>
+                    <li>Add, or delete likes</li>
+                    <li>Add, edit, or delete notifications.</li>
+                    <li>View or remove subscribers.</li>
+                    <li>View or remove contacts/messages.</li>
+                </ul>
+        </div>
+        <div class="col-md-6">
+            <p class="text-primary">Standard users can:</p>
+                <ul>
+                    <li>View published stories.</li>
+                    <li>View posted poems.</li>
+                    <li>View notifications.</li>
+                    <li>Like stories/poems.</li>
+                    <li>Comment stories/poems.</li>
+                    <li>View story likes & comments</li>
+                    <li>Reply to story/poem comments.</li>
+                    <li>Like story/poem comments</li>
+                    <li>Subscribe or unsuscribe to/from monthly newsletter.</li>
+                    <li>Send email messages to the admin.</li>
+                </ul>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -26,7 +26,7 @@
             <ul>
             {% for on in ongoing %}
             <li>
-                <li><a href="{% url 'story-details' on.id}"><strong>{{on.title}}</strong></a></li>
+                <a href="{% url 'story-details' on.id}"><strong>{{on.title}}</strong></a>
             </li>
             {% endfor %}
             </ul>
@@ -38,7 +38,7 @@
             <ul>
             {% for comp in completed %}
             <li>
-                <li><a href="{% url 'story-details' com.id}"><strong>{{com.title}}</strong></a></li>
+                <a href="{% url 'story-details' com.id}"><strong>{{com.title}}</strong></a>
             </li>
             {% endfor %}
             </ul>
