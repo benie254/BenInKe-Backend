@@ -110,6 +110,7 @@ CORS_ORIGIN_WHITELIST = (
     'https://beninke.web.app',
     'https://benie.web.app',
     'https://janja.web.app',
+    'https://ben-in-ke-backend-nvp1.vercel.app',
 )
 
 MIDDLEWARE = [
