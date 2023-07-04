@@ -14,9 +14,10 @@ from sendgrid.helpers.mail import Mail
 import os
 from benie_app.serializers import StorySerializer, TagSerializer, ReactionSerializer, FeedbackSerializer, ReplySerializer, ChapterSerializer, PageSerializer, SubscriberSerializer, NotificationSerializer, ContactSerializer, PoemSerializer
 from benie_app.models import Story, Tag, Reaction, Feedback, Chapter, Page, Subscriber, Notification, Contact, Poem, Reply
+from drf_yasg.utils import swagger_auto_schema
 
 # Create your views here.
-@permission_classes([IsAuthenticatedOrReadOnly,])
+@permission_classes([AllowAny,])
 def landing(request):
     title = 'Home'
     return render(request,'landing.html',{"title":title})
@@ -88,6 +89,8 @@ class AllFeedbacks(APIView):
         feedbacks = Feedback.objects.all().order_by('-date')
         serializers = FeedbackSerializer(feedbacks,many=True)
         return Response(serializers.data)
+    
+    @swagger_auto_schema(request_body=FeedbackSerializer)
     def post(self, request):
         serializers = FeedbackSerializer(data=request.data)
         if serializers.is_valid():
@@ -146,7 +149,8 @@ class AllReplies(APIView):
         replies = Reply.objects.all().order_by('-date')
         serializers = ReplySerializer(replies,many=True)
         return Response(serializers.data)
-
+    
+    @swagger_auto_schema(request_body=ReplySerializer)
     def post(self, request):
         serializers = ReplySerializer(data=request.data)
         if serializers.is_valid():
@@ -208,7 +212,8 @@ class AllRecations(APIView):
         reactions = Reaction.objects.all()
         serializers = ReactionSerializer(reactions,many=True)
         return Response(serializers.data)
-
+    
+    @swagger_auto_schema(request_body=ReactionSerializer)
     def post(self, request):
         serializers = ReactionSerializer(data=request.data)
         if serializers.is_valid():
@@ -321,7 +326,8 @@ class ChapterReactions(APIView):
         likes = Reaction.objects.all().filter(chapter=id)
         serializers = ReactionSerializer(likes,many=True)
         return Response(serializers.data)
-
+    
+    @swagger_auto_schema(request_body=ReactionSerializer)
     def post(self, request):
         serializers = ReactionSerializer(data=request.data)
         if serializers.is_valid():
@@ -338,6 +344,7 @@ class StoryFeedbacks(APIView):
 
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class AddStory(APIView):
+    @swagger_auto_schema(request_body=StorySerializer)
     def post(self, request):
         serializers = StorySerializer(data=request.data)
         if serializers.is_valid():
@@ -347,6 +354,7 @@ class AddStory(APIView):
 
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class AddPoem(APIView):
+    @swagger_auto_schema(request_body=PoemSerializer)
     def post(self, request):
         serializers = PoemSerializer(data=request.data)
         if serializers.is_valid():
@@ -356,6 +364,7 @@ class AddPoem(APIView):
     
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class AddPage(APIView):
+    @swagger_auto_schema(request_body=PageSerializer)
     def post(self, request):
         serializers = PageSerializer(data=request.data)
         if serializers.is_valid():
@@ -365,6 +374,7 @@ class AddPage(APIView):
 
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class UpdateStory(APIView):
+    @swagger_auto_schema(request_body=StorySerializer)
     def put(self, request, id, format=None):
         story = Story.objects.all().filter(pk=id).last()
         serializers = StorySerializer(story,request.data)
@@ -380,6 +390,7 @@ class UpdateStory(APIView):
     
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class UpdatePage(APIView):
+    @swagger_auto_schema(request_body=PageSerializer)
     def put(self, request, id, format=None):
         page = Page.objects.all().filter(pk=id).last()
         serializers = PageSerializer(page,request.data)
@@ -395,6 +406,7 @@ class UpdatePage(APIView):
 
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class UpdatePoem(APIView):
+    @swagger_auto_schema(request_body=PoemSerializer)
     def put(self, request, id, format=None):
         poem = Poem.objects.all().filter(pk=id).last()
         serializers = PoemSerializer(poem,request.data)
@@ -410,6 +422,7 @@ class UpdatePoem(APIView):
 
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class AddChapter(APIView):
+    @swagger_auto_schema(request_body=ChapterSerializer)
     def post(self, request):
         serializers = ChapterSerializer(data=request.data)
         if serializers.is_valid():
@@ -419,6 +432,7 @@ class AddChapter(APIView):
 
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class UpdateChapter(APIView):
+    @swagger_auto_schema(request_body=ChapterSerializer)
     def put(self, request, id, format=None):
         chap = Chapter.objects.all().filter(pk=id).last()
         serializers = ChapterSerializer(chap,request.data)
@@ -434,6 +448,7 @@ class UpdateChapter(APIView):
     
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class AddTag(APIView):
+    @swagger_auto_schema(request_body=TagSerializer)
     def post(self, request):
         serializers = TagSerializer(data=request.data)
         if serializers.is_valid():
@@ -447,7 +462,8 @@ class TagDetails(APIView):
         tag = Tag.objects.all().filter(pk=id).last()
         serializers = TagSerializer(tag,many=False)
         return Response(serializers.data)
-
+    
+    @swagger_auto_schema(request_body=TagSerializer)
     def put(self, request, id, format=None):
         tag = Tag.objects.all().filter(pk=id).last()
         serializers = TagSerializer(tag,request.data)
@@ -456,10 +472,10 @@ class TagDetails(APIView):
             return Response(serializers.data)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST) 
 
-def delete(self, request, id, format=None):
-        tag = Tag.objects.all().filter(pk=id).last()
-        tag.delete()
-        return Response(status=status.HTTP_200_OK) 
+    def delete(self, request, id, format=None):
+            tag = Tag.objects.all().filter(pk=id).last()
+            tag.delete()
+            return Response(status=status.HTTP_200_OK) 
 
 @permission_classes([IsAuthenticatedOrReadOnly,])
 class ReactionDetails(APIView):
@@ -490,7 +506,8 @@ class FeedbackDetails(APIView):
         print("replies",comment.replies)
         serializers = FeedbackSerializer(comment,many=False)
         return Response(serializers.data)
-
+    
+    @swagger_auto_schema(request_body=FeedbackSerializer)
     def put(self, request, id, format=None):
         feedback = Feedback.objects.all().filter(pk=id).last()
         serializers = FeedbackSerializer(feedback,request.data)
@@ -602,6 +619,7 @@ class AllSubscribers(APIView):
         serializers = SubscriberSerializer(subscribers,many=True)
         return Response(serializers.data)
     
+    @swagger_auto_schema(request_body=SubscriberSerializer)
     def post(self,request,format=None):
         serializers = SubscriberSerializer(data=request.data)
         if serializers.is_valid():
@@ -711,7 +729,8 @@ class Notifications(APIView):
         notifications = Notification.objects.all().order_by('-date')
         serializers = NotificationSerializer(notifications,many=True)
         return Response(serializers.data)
-
+    
+    @swagger_auto_schema(request_body=NotificationSerializer)
     def post(self, request, format=None):
         serializers = NotificationSerializer(data=request.data)
         if serializers.is_valid():
@@ -725,7 +744,8 @@ class NotificationDetails(APIView):
         notification = Notification.objects.all().filter(pk=id).last()
         serializers = NotificationSerializer(notification,many=False)
         return Response(serializers.data)
-
+    
+    @swagger_auto_schema(request_body=NotificationSerializer)
     def put(self, request, id, format=None):
         notification = Notification.objects.all().filter(pk=id).last()
         serializers = NotificationSerializer(notification,request.data)
@@ -748,6 +768,7 @@ class Contacts(APIView):
 
 @permission_classes([AllowAny,])
 class AddContact(APIView):
+    @swagger_auto_schema(request_body=ContactSerializer)
     def post(self, request, format=None):
         serializers = ContactSerializer(data=request.data)
         if serializers.is_valid():
@@ -809,7 +830,8 @@ class ContactDetails(APIView):
         contact = Contact.objects.all().filter(pk=id).last()
         serializers = ContactSerializer(contact,many=False)
         return Response(serializers.data)
-
+    
+    @swagger_auto_schema(request_body=ContactSerializer)
     def put(self, request, id, format=None):
         contact = Contact.objects.all().filter(pk=id).last()
         serializers = ContactSerializer(contact,request.data)
@@ -829,7 +851,8 @@ class SubscriberDetails(APIView):
         subscriber = Subscriber.objects.all().filter(pk=id).last()
         serializers = SubscriberSerializer(subscriber,many=False)
         return Response(serializers.data)
-
+    
+    @swagger_auto_schema(request_body=SubscriberSerializer)
     def put(self, request, id, format=None):
         subscriber = Subscriber.objects.all().filter(pk=id).last()
         serializers = SubscriberSerializer(subscriber,request.data)

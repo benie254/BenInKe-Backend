@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'cloudinary',
     'bootstrap5',
+    'drf_yasg',
 ]
 
 REST_FRAMEWORK = {
