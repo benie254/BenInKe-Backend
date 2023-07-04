@@ -2,7 +2,7 @@
 Back-end logic for a blog application
 
 # BenInKe-Backend
-#### API development for a blog app, generated with [Django](https://www.djangoproject.com/) version 4.2.1
+#### API development for a blog app, generated with [Django](https://www.djangoproject.com/) version 3.2.9
 ## Author
 [Benson Langat](https://github.com/benie254)
 
@@ -62,4 +62,4 @@ SOFTWARE.*
 
 Copyright (c) 2023 **[Benson Langat](https://github.com/benie254)**
 
-[Django](https://www.djangoproject.com/) version 4.2.1
+[Django](https://www.djangoproject.com/) version 3.2.9
